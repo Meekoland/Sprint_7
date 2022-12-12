@@ -1,34 +1,57 @@
+import api.client.Constants;
+import api.client.Order;
+import api.client.OrdersClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
+@RunWith(Parameterized.class)
 @DisplayName("Тесты создания заказа")
-public class TestCreateOrder {
-    DataOrder dataOrder = new DataOrder();
-    private void testCodeAndBody(Order order) {
-        Response response =
-                given().header("Content-type", "application/json")
-                        .and()
-                        .body(order)
-                        .when()
-                        .post("/api/v1/orders");
-        response.then().assertThat()
-                .statusCode(201)
-                .and()
-                .body("track", notNullValue());
-        JsonPath jsonPathEvaluator = response.jsonPath();
-        track = jsonPathEvaluator.get("track");
+public class TestCreateOrder extends Constants{
+    private final String firstNameValue;
+    private final String lastNameValue;
+    private final String addressValue;
+    private final int metroStationValue;
+    private final String phoneValue;
+    private final int rentTimeValue;
+    private final String deliveryDateValue;
+    private final String commentValue;
+    private final List<String> colorValue;
+    public int track;
+
+    public TestCreateOrder(String firstNameValue, String lastNameValue, String addressValue, int metroStationValue, String phoneValue, int rentTimeValue, String deliveryDateValue, String commentValue, List<String> colorValue) {
+        this.firstNameValue = firstNameValue;
+        this.lastNameValue = lastNameValue;
+        this.addressValue = addressValue;
+        this.metroStationValue = metroStationValue;
+        this.phoneValue = phoneValue;
+        this.rentTimeValue = rentTimeValue;
+        this.deliveryDateValue = deliveryDateValue;
+        this.commentValue = commentValue;
+        this.colorValue = colorValue;
     }
-    int track;
+
+    @Parameterized.Parameters
+    public static Object[][] getTestDataCreateOrder() {
+        return new Object[][]{
+                {"Иван", "Иванов", "Ленина 24", 10, "89965474376", 2, "2022-09-15", "4-й подъезд", null},
+                {"Иван", "Иванов", "Ленина 24", 10, "89965474376", 2, "2022-09-15", "4-й подъезд", List.of("BLACK")},
+                {"Иван", "Иванов", "Ленина 24", 10, "89965474376", 2, "2022-09-15", "4-й подъезд", List.of("GREY")},
+                {"Иван", "Иванов", "Ленина 24", 10, "89965474376", 2, "2022-09-15", "4-й подъезд", List.of("BLACK", "GREY")},
+        };
+    }
 
     @Before
     public void setUp() {
@@ -36,27 +59,14 @@ public class TestCreateOrder {
     }
 
     @Test
-    @DisplayName("Тест возможности создания заказа с значение в поле color - BLACK")
-    public void testCreateOrderScooterWithColorBlack() {
-        testCodeAndBody(dataOrder.dataTestCreateOrderScooterColor(List.of("BLACK")));
-    }
-
-    @Test
-    @DisplayName("Тест возможности создания заказа с значение в поле color - GREY")
-    public void testCreateOrderScooterWithColorGrey() {
-        testCodeAndBody(dataOrder.dataTestCreateOrderScooterColor(List.of("GREY")));
-    }
-
-    @Test
-    @DisplayName("Тест возможности создания заказа с значение в поле color - BLACK и GREY")
-    public void testCreateOrderScooterWithColorBlackAndGrey() {
-        testCodeAndBody(dataOrder.dataTestCreateOrderScooterColor(List.of("BLACK", "GREY")));
-    }
-
-    @Test
-    @DisplayName("Тест возможности создания заказа с пустым полем color")
-    public void testCreateOrderScooterWithColorEmpty() {
-        testCodeAndBody(dataOrder.dataTestCreateOrderScooterColor(List.of()));
+    public void testCodeAndBody(){
+        OrdersClient ordersClient = new OrdersClient();
+        ValidatableResponse emptyPasswordField  = ordersClient.getOrdersResponse(
+                new Order(firstNameValue, lastNameValue, addressValue,
+                        metroStationValue, phoneValue, rentTimeValue, deliveryDateValue, commentValue, colorValue));
+        emptyPasswordField
+                .statusCode(201);
+        MatcherAssert.assertThat("track", notNullValue());
     }
 
     @After

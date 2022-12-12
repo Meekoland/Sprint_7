@@ -4,9 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe656cc2-6cbc-4fb5-bfe3-23d7f58679ac" name="Changes" comment="">
+    <list default="true" id="fe656cc2-6cbc-4fb5-bfe3-23d7f58679ac" name="Changes" comment="my commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/api/client/Order.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DataOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/client/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCreateCourier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCreateCourier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestCreateOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestCreateOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestListOrders.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestListOrders.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TestLoginCourier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestLoginCourier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/2a2bfdfd-0a5d-43d6-ac61-b2433e847d69-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/30c87c78-4c88-49a1-b386-9c5a45b93638-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/33d298e2-c801-4c0f-9d41-12b49f86437a-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/621cad3d-7fc1-4469-9f7c-f4ee58ccc6c3-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/8178f6de-aff7-4f3f-8ce1-786cc12a3e81-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/900bd2b1-dd9d-4cdb-bcaf-269c5e54c0ad-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/931de0f8-fbc9-4744-8b18-06fd5fa566fa-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/9eadca1d-85ae-46e3-bd1e-34e8057782ba-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/a422b7a1-8bd1-49a9-8374-8e3f7e6e16e0-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/allure.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/allure.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/b43fb964-0ce8-4c1d-9520-a7fb0a11c43c-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/be88775d-8a00-4c82-afa1-1795a10eb4db-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/c42817f4-1361-46e1-ab6c-6c12c0d92fc8-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/c823b702-2df1-4fcf-bb69-942f70c61b8f-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/d1d4902c-9fb2-41a2-960e-f8b7e2a1f69e-result.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/allure-results/ff5f9a49-1d6c-4e3f-b6d4-fb06fe63b794-result.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +72,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
-  <component name="RunManager" selected="JUnit.TestLoginCourier.testCourierCanBeAuthorizationWithoutLogin">
+  <component name="RunManager" selected="JUnit.TestLoginCourier.testCourierCanBeAuthorizationWithoutPassword">
     <configuration name="TestLoginCourier.testCourierCanBeAuthorizationWithoutLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Sprint_7" />
       <option name="PACKAGE_NAME" value="" />
@@ -87,6 +109,14 @@
       <option name="presentableId" value="Default" />
       <updated>1670769849029</updated>
     </task>
+    <task id="LOCAL-00001" summary="my commit">
+      <created>1670789811415</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1670789811415</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,5 +141,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="my commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="my commit" />
   </component>
 </project>

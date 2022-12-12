@@ -1,6 +1,8 @@
+import api.client.Constants;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +10,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
 @DisplayName("Тесты списка заказов")
-public class TestListOrders {
+public class TestListOrders extends Constants {
 
     @Before
     public void setUp() {
@@ -18,11 +20,11 @@ public class TestListOrders {
     @Test
     @DisplayName("Тест получения списка заказов")
     public void testOrdersList() {
-        Response response =
-                given().get("/api/v1/orders");
-        response.then().assertThat()
-                .statusCode(200)
-                .and()
-                .body("orders", notNullValue());
+        Response response = given()
+                .when()
+                .header("Content-type", "application/json")
+                .get(API_ORDER);
+        response.then().log().all();
+        MatcherAssert.assertThat("orders", notNullValue());
     }
 }

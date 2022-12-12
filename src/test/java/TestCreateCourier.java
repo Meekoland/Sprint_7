@@ -1,111 +1,72 @@
-import io.qameta.allure.Description;
+import api.client.Courier;
+import api.client.CourierClient;
+import api.client.Methods;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.File;
-
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.core.Is.is;
 
 @DisplayName("Тесты создания курьера")
-public class TestCreateCourier {
-    private Response response(File json) {
-        return given().header("Content-type", "application/json")
-                .and()
-                .body(json)
-                .when()
-                .post("/api/v1/courier");
-    }
+public class TestCreateCourier extends Methods {
     @Before
     public void setUp() {
         RestAssured.baseURI = "https://qa-scooter.praktikum-services.ru";
-    }
-
-    @Test
-    @DisplayName("Тест возможности создания курьера")
-    @Description("Так же покрывает тест создания курьера с передачей всех обязательных полей")
-    public void testCourierCanBeCreated() {
-        File json = new File("src/test/resources/courierFull.json");
-        response(json).then().assertThat()
-                .statusCode(201)
-                .and()
-                .body("ok", is(true));
+        createAccount();
     }
 
     @Test
     @DisplayName("Тест возможности создания двух одинаковых курьеров")
-    @Description("Так же покрывает тест создания курьера с существующим логином")
     public void testCreatingTwoIdenticalCouriers() {
-        File json = new File("src/test/resources/courierFull.json");
-        response(json);
-        response(json).then().assertThat()
+        CourierClient courierClient = new CourierClient();
+        ValidatableResponse duplicateLogin  = courierClient.getCourierResponse(
+                new Courier(existingLogin, existingLoginPassword, existingLoginFirstName));
+        duplicateLogin
                 .statusCode(409)
-                .and()
-                .body("code", equalTo(409))
-                .and()
+                .assertThat()
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
     @Test
     @DisplayName("Тест возможности создания курьера без поля login")
     public void testCourierCanBeCreatedWithoutLogin() {
-        File json = new File("src/test/resources/courierWithoutLogin.json");
-        response(json).then().assertThat()
+        CourierClient courierClient = new CourierClient();
+        ValidatableResponse emptyLoginField  = courierClient.getCourierResponse(
+                new Courier(null, existingLoginPassword, existingLoginFirstName));
+        emptyLoginField
                 .statusCode(400)
-                .and()
-                .body("code", equalTo(400))
-                .and()
+                .assertThat()
                 .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 
     @Test
     @DisplayName("Тест возможности создания курьера без поля password")
     public void testCourierCanBeCreatedWithoutPassword() {
-        File json = new File("src/test/resources/courierWithoutPassword.json");
-        response(json).then().assertThat()
+        CourierClient courierClient = new CourierClient();
+        ValidatableResponse emptyPasswordField  = courierClient.getCourierResponse(
+                new Courier(existingLogin, null, existingLoginFirstName));
+        emptyPasswordField
                 .statusCode(400)
-                .and()
-                .body("code", equalTo(400))
-                .and()
+                .assertThat()
                 .body("message", equalTo("Недостаточно данных для создания учетной записи"));
     }
 
     @Test
     @DisplayName("Тест возможности создания курьера без поля firstName")
     public void testCourierCanBeCreatedWithoutFirstName() {
-        File json = new File("src/test/resources/courierWithoutFirstName.json");
-        response(json).then().assertThat()
+        CourierClient courierClient = new CourierClient();
+        ValidatableResponse duplicateLogin  = courierClient.getCourierResponse(
+                Courier.getRandomCourier());
+        duplicateLogin
                 .statusCode(201)
-                .and()
-                .body("ok", is(true));
+                .assertThat()
+                .body("ok", equalTo(true));
     }
 
     @After
-    public void tearDown() {
-        File json = new File("src/test/resources/courierWithoutFirstName.json");
-        Response responseId =
-                given().header("Content-type", "application/json")
-                        .and()
-                        .body(json)
-                        .when()
-                        .post("/api/v1/courier/login");
-        int statusId = responseId.statusCode();
-        if (statusId == 200) {
-            JsonPath jsonPathEvaluator = responseId.jsonPath();
-            String id = jsonPathEvaluator.get("id").toString();
-            Response responseDelete =
-                    given().when()
-                            .delete("/api/v1/courier/" + id);
-            int statusDelete = responseDelete.statusCode();
-            if (statusDelete != 200) {
-                System.out.println("Не удалось удалить курьера");
-            }
-        }
+    public void tearDown(){
+        deleteLogin();
     }
 }
