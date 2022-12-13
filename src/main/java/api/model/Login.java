@@ -1,4 +1,4 @@
-package api.client;
+package api.model;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -9,6 +9,13 @@ public class Login {
     public Login(String login, String password) {
         this.login = login;
         this.password = password;
+    }
+
+    public static Login getRandomLoginData() {
+        return new Login(
+                RandomStringUtils.randomAlphabetic(10) + "",
+                RandomStringUtils.randomAlphanumeric(10) + ""
+        );
     }
 
     public String getLogin() {
@@ -25,12 +32,5 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static Login getRandomLoginData(){
-        return new Login(
-                RandomStringUtils.randomAlphabetic(10) + "",
-                RandomStringUtils.randomAlphanumeric(10) + ""
-        );
     }
 }

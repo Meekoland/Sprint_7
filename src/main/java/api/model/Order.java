@@ -1,4 +1,6 @@
-package api.client;
+package api.model;
+
+import api.util.Constants;
 
 import java.util.List;
 

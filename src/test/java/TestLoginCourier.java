@@ -1,6 +1,6 @@
 import api.client.CourierClient;
-import api.client.Login;
-import api.client.Methods;
+import api.model.Login;
+import api.util.Methods;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
@@ -8,6 +8,7 @@ import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 

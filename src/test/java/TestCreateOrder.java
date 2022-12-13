@@ -1,11 +1,11 @@
-import api.client.Constants;
-import api.client.Order;
 import api.client.OrdersClient;
+import api.model.Order;
+import api.util.Constants;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
-import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +15,12 @@ import org.junit.runners.Parameterized;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 @RunWith(Parameterized.class)
 @DisplayName("Тесты создания заказа")
-public class TestCreateOrder extends Constants{
+public class TestCreateOrder extends Constants {
     private final String firstNameValue;
     private final String lastNameValue;
     private final String addressValue;
@@ -65,8 +66,10 @@ public class TestCreateOrder extends Constants{
                 new Order(firstNameValue, lastNameValue, addressValue,
                         metroStationValue, phoneValue, rentTimeValue, deliveryDateValue, commentValue, colorValue));
         emptyPasswordField
-                .statusCode(201);
-        MatcherAssert.assertThat("track", notNullValue());
+                .assertThat()
+                .statusCode(201)
+                .and()
+                .body("track", notNullValue());
     }
 
     @After

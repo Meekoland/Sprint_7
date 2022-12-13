@@ -1,5 +1,8 @@
 package api.client;
 
+import api.model.Courier;
+import api.model.Login;
+import api.util.Constants;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 

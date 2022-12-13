@@ -1,4 +1,4 @@
-package api.client;
+package api.util;
 
 public class Constants {
     protected final String API_COURIER = "/api/v1/courier";
@@ -7,6 +7,4 @@ public class Constants {
     protected final String existingLogin = "pasha";
     protected final String existingLoginPassword = "7534";
     protected final String existingLoginFirstName = "pasha";
-
-
 }

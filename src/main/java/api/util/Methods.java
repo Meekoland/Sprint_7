@@ -1,5 +1,7 @@
-package api.client;
+package api.util;
 
+import api.model.Courier;
+import api.model.Login;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;

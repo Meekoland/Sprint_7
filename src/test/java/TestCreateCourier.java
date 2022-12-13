@@ -1,12 +1,13 @@
-import api.client.Courier;
 import api.client.CourierClient;
-import api.client.Methods;
+import api.model.Courier;
+import api.util.Methods;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName("Тесты создания курьера")
