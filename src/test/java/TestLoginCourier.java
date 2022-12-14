@@ -4,7 +4,6 @@ import api.util.Methods;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
-import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +27,9 @@ public class TestLoginCourier extends Methods {
         ValidatableResponse dataCourier = courierClient.getLoginResponse(
                 new Login(existingLogin, existingLoginPassword));
         dataCourier
-                .statusCode(200);
-        MatcherAssert.assertThat("id", notNullValue());
+                .statusCode(200)
+                .assertThat()
+                .body("id", notNullValue());
     }
 
     @Test
